@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <meta name="description" content="Manage your inventory efficiently with our easy-to-use web application.">
+    <meta name="keywords" content="inventory, management, web app, inventory system">
+    <meta name="author" content="Low-Cal Cost Team">
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Inventory Management">
+    <meta property="og:description" content="Manage your inventory efficiently with our easy-to-use web application.">
+    <meta property="og:image" content="Images/Favicon.png">
+    <meta property="og:url" content="http://Inventory-Management.com">
+    <!-- Linking Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-icons.css">
+    <!-- Favicon -->
+    <link rel="icon" href="Images/Favicon.png" type="image/png">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <i class="bi bi-box-seam me-2"></i>
+      Inventory Management
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Dashboard Content -->
+  <main class="container my-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card card-teal">
+          <div class="card-body">
+            <i class="bi bi-card-checklist"></i>
+            <div>
+              <h5 class="card-title">Total Products</h5>
+              <h3 class="card-text">120</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card card-teal">
+          <div class="card-body">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <div>
+              <h5 class="card-title">Stock Alerts</h5>
+              <h3 class="card-text">5</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card card-teal">
+          <div class="card-body">
+            <i class="bi bi-clock-fill"></i>
+            <div>
+              <h5 class="card-title">Recent Activity</h5>
+              <h3 class="card-text">12</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card card-teal">
+          <div class="card-body">
+            <i class="bi bi-bar-chart-fill"></i>
+            <div>
+              <h5 class="card-title">Revenue</h5>
+              <h3 class="card-text">$5,600</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity List -->
+    <section class="mt-5">
+      <h4>Recent Activity</h4>
+      <ul class="recent-list">
+        <li>New product added: Widget C</li>
+        <li>Stock level updated for Gadget A</li>
+        <li>Stock level updated for Widget B</li>
+        <li>Product removed: Gadget B</li>
+        <li>New product added: Gadget C</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
