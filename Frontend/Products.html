@@ -21,23 +21,19 @@
 </head>
 <body id="Product-Body">
 
-      <!-- Search and Filter Section -->
-      <div class="container my-5">
+    <div class="container my-5">
         <h2 class="text-center mb-4">Product Table</h2>
 
-        <!-- Search and Filter Form -->
-        <div class="search-filter">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search for Products..." onkeyup="searchTable()">
-            <div class="mt-2">
-                <label for="categoryFilter">Category:</label>
-                <select id="categoryFilter" class="form-select filter-btn" onchange="filterTable()">
-                    <option value="">All Categories</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Toys">Toys</option>
-                </select>
-            </div>
+        <!-- Search and Filter -->
+        <div class="search-filter d-flex justify-content-between mb-4">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search Products" onkeyup="filterTable()">
+            <select class="form-select" id="categoryFilter" onchange="filterTable()">
+                <option value="">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Toys">Toys</option>
+            </select>
         </div>
 
         <!-- Product Table -->
@@ -90,52 +86,32 @@
     <!-- Bootstrap JS Bundle -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript for Search and Filter -->
+    <!-- JavaScript for Search and Filter -->
     <script>
-        // Search function for the table
-        function searchTable() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById('searchInput');
-            filter = input.value.toUpperCase();
-            table = document.getElementById('productTable');
-            tr = table.getElementsByTagName('tr');
-
-            for (i = 1; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName('td');
-                for (var j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            break;
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        }
-
-        // Filter function for categories
+        // Function to filter the table based on search and category
         function filterTable() {
-            var filter, table, tr, td, i;
-            filter = document.getElementById("categoryFilter").value;
-            table = document.getElementById("productTable");
-            tr = table.getElementsByTagName("tr");
+            var searchInput = document.getElementById("searchInput").value.toLowerCase();
+            var categoryFilter = document.getElementById("categoryFilter").value;
+            var table = document.getElementById("productTable");
+            var rows = table.getElementsByTagName("tr");
 
-            for (i = 1; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Get category column
-                if (td) {
-                    if (filter === "" || td.textContent === filter) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
+            // Loop through all table rows, except the header row
+            for (var i = 1; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName("td");
+                var productName = cells[0].textContent.toLowerCase();
+                var productCategory = cells[1].textContent.toLowerCase();
+
+                // Check if the row matches the search input and category filter
+                if (
+                    (productName.includes(searchInput) || searchInput === "") &&
+                    (productCategory.includes(categoryFilter.toLowerCase()) || categoryFilter === "")
+                ) {
+                    rows[i].style.display = ""; // Show the row
+                } else {
+                    rows[i].style.display = "none"; // Hide the row
                 }
             }
         }
-
-<!-- Bootstrap JS Bundle -->
-<script src="js/bootstrap.bundle.min.js"></script>
+    </script>
 </body>
 </html>

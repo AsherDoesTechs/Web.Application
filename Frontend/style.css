@@ -332,4 +332,33 @@ body    {
     flex-direction: column;
     justify-content: space-between;
   }
-  
+    /* Custom Styling */
+    .table-container {
+        max-width: 100%;
+        overflow-x: auto;
+        margin-top: 30px;
+    }
+
+    .search-filter {
+        margin: 20px 0;
+    }
+
+    .filter-btn {
+        margin-left: 10px;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        text-align: center;
+    }
+
+    .table td {
+        text-align: center;
+    }
+
+    .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #fff;
+    }
