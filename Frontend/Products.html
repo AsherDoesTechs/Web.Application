@@ -20,98 +20,153 @@
     <link rel="icon" href="Images/Favicon.png" type="image/png">
 </head>
 <body id="Product-Body">
-
     <div class="container my-5">
         <h2 class="text-center mb-4">Product Table</h2>
-
-        <!-- Search and Filter -->
-        <div class="search-filter d-flex justify-content-between mb-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search Products" onkeyup="filterTable()">
-            <select class="form-select" id="categoryFilter" onchange="filterTable()">
-                <option value="">All Categories</option>
+    
+        <!-- Button to show the form -->
+        <button type="button" class="btn btn-primary mb-3" onclick="showAddProductForm()">Add Product</button>
+        <button type="button" class="btn btn-danger mb-3" onclick="closeAddProductForm()">Discard Changes</button>
+        <!-- Add/Edit Product Form -->
+        <div id="addProductForm">
+          <h3>Add or Edit Product</h3>
+          <form id="productForm">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="productName" required oninput="generateSKU()" />
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-select" id="category" required onchange="generateSKU()">
                 <option value="Electronics">Electronics</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Clothing">Clothing</option>
                 <option value="Toys">Toys</option>
-            </select>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="quantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="quantity" required />
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" step="0.01" class="form-control" id="price" required />
+            </div>
+            <div class="mb-3">
+              <label for="sku" class="form-label">SKU</label>
+              <input type="text" class="form-control" id="sku" readonly />
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <select class="form-select" id="status" required>
+                <option value="in stock">In Stock</option>
+                <option value="low stock">Low Stock</option>
+                <option value="out of stock">Out of Stock</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="supplier" class="form-label">Supplier</label>
+              <input type="text" class="form-control" id="supplier" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Save Product</button>
+          </form>
         </div>
-
+    
+        <!-- Search and Filter -->
+        <div class="search-filter d-flex justify-content-start mb-4">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search by Product Name" onkeyup="filterTable()" />
+          <select class="form-select" id="categoryFilter" onchange="filterTable()">
+            <option value="">All Categories</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Toys">Toys</option>
+          </select>
+          <select class="form-select" id="stockFilter" onchange="filterTable()">
+            <option value="">All Stock Status</option>
+            <option value="in">In Stock</option>
+            <option value="low">Low Stock</option>
+            <option value="out">Out of Stock</option>
+          </select>
+          <input type="number" step="0.01" id="minPrice" class="form-control" placeholder="Min Price" oninput="filterTable()" />
+          <input type="number" step="0.01" id="maxPrice" class="form-control" placeholder="Max Price" oninput="filterTable()" />
+        </div>
+    
         <!-- Product Table -->
         <div class="table-container">
-            <table class="table table-bordered table-hover" id="productTable">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Smartphone</td>
-                        <td>Electronics</td>
-                        <td>50</td>
-                        <td>$499.99</td>
-                    </tr>
-                    <tr>
-                        <td>Office Chair</td>
-                        <td>Furniture</td>
-                        <td>20</td>
-                        <td>$99.99</td>
-                    </tr>
-                    <tr>
-                        <td>T-Shirt</td>
-                        <td>Clothing</td>
-                        <td>100</td>
-                        <td>$19.99</td>
-                    </tr>
-                    <tr>
-                        <td>Action Figure</td>
-                        <td>Toys</td>
-                        <td>200</td>
-                        <td>$15.99</td>
-                    </tr>
-                    <tr>
-                        <td>Laptop</td>
-                        <td>Electronics</td>
-                        <td>30</td>
-                        <td>$899.99</td>
-                    </tr>
-                </tbody>
-            </table>
+          <table class="table table-bordered table-hover" id="productTable">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>SKU</th>
+                <th>Status</th>
+                <th>Supplier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Product rows here -->
+            </tbody>
+          </table>
         </div>
-    </div>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="js/bootstrap.bundle.min.js"></script>
-
-    <!-- JavaScript for Search and Filter -->
-    <script>
-        // Function to filter the table based on search and category
+      </div>
+    
+      <!-- Bootstrap JS -->
+      <script src="js/bootstrap.bundle.min.js"></script>
+    
+      <!-- JavaScript for Search and Filter -->
+      <script>
         function filterTable() {
-            var searchInput = document.getElementById("searchInput").value.toLowerCase();
-            var categoryFilter = document.getElementById("categoryFilter").value;
-            var table = document.getElementById("productTable");
-            var rows = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, except the header row
-            for (var i = 1; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName("td");
-                var productName = cells[0].textContent.toLowerCase();
-                var productCategory = cells[1].textContent.toLowerCase();
-
-                // Check if the row matches the search input and category filter
-                if (
-                    (productName.includes(searchInput) || searchInput === "") &&
-                    (productCategory.includes(categoryFilter.toLowerCase()) || categoryFilter === "")
-                ) {
-                    rows[i].style.display = ""; // Show the row
-                } else {
-                    rows[i].style.display = "none"; // Hide the row
-                }
-            }
+          const searchInput = document.getElementById("searchInput").value.toLowerCase();
+          const categoryFilter = document.getElementById("categoryFilter").value.toLowerCase();
+          const stockFilter = document.getElementById("stockFilter").value;
+          const minPrice = parseFloat(document.getElementById("minPrice").value);
+          const maxPrice = parseFloat(document.getElementById("maxPrice").value);
+    
+          const table = document.getElementById("productTable");
+          const rows = table.getElementsByTagName("tr");
+    
+          for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            const productName = cells[0].textContent.toLowerCase();
+            const category = cells[1].textContent.toLowerCase();
+            const quantity = parseInt(cells[2].textContent);
+            const price = parseFloat(cells[3].textContent);
+            const status = cells[5].textContent.toLowerCase();
+    
+            const matchSearch = productName.includes(searchInput) || searchInput === "";
+            const matchCategory = category.includes(categoryFilter) || categoryFilter === "";
+            const matchStock =
+              stockFilter === "" ||
+              (stockFilter === "in" && status.includes("in")) ||
+              (stockFilter === "low" && status.includes("low")) ||
+              (stockFilter === "out" && status.includes("out"));
+    
+            const matchMinPrice = isNaN(minPrice) ? true : (Math.abs(price - minPrice) < 0.001 || price > minPrice);
+            const matchMaxPrice = isNaN(maxPrice) ? true : (Math.abs(price - maxPrice) < 0.001 || price < maxPrice);
+    
+            rows[i].style.display = matchSearch && matchCategory && matchStock && matchMinPrice && matchMaxPrice ? "" : "none";
+          }
         }
-    </script>
-</body>
+    
+        function showAddProductForm() {
+          document.getElementById("addProductForm").style.display = "block";
+        }
+
+        function closeAddProductForm() {
+          document.getElementById("addProductForm").style.display = "none";
+        }
+    
+        function generateSKU() {
+          const productName = document.getElementById("productName").value.trim();
+          const category = document.getElementById("category").value;
+          const categoryCode = category.substring(0, 3).toUpperCase();
+          const randomNum = Math.floor(Math.random() * 10000);
+          const sku = `${categoryCode}-${randomNum}`;
+          
+          document.getElementById("sku").value = sku;
+        }
+      </script>
+  </body>
 </html>
