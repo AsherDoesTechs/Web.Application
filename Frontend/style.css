@@ -323,4 +323,13 @@ body    {
       font-size: 0.9rem;
     }
   }
+
+   /* Main Container Styling */
+   #Product-Body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   
