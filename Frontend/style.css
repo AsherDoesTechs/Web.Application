@@ -115,4 +115,212 @@ body    {
 
 }
 
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    height: 100vh;
+  }
+  
+  /* Main Container Styling */
+  #Dashboard-Body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Navbar Styling */
+  nav.navbar {
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.75rem;
+  }
+  
+  nav .navbar-toggler-icon {
+    background-color: #fff;
+  }
+  
+  /* Card Styling */
+/* Ensure images scale appropriately within the card */
+.card-teal img {
+    max-width: 100%;         /* Makes sure the image takes up the available space without overflowing */
+    height: auto;            /* Maintain aspect ratio */
+    width: 40px;             /* Set a fixed width to control image size */
+    margin-right: 15px;      /* Add some space between the image and the text */
+    display: inline-block;   /* Keep image inline with text */
+  }
+  
+  /* Card body improvements */
+/* Card body layout for right-side image */
+.card-teal .card-body {
+    display: flex;
+    align-items: center;           /* Vertically center the items */
+    justify-content: flex-start;   /* Align items to the left */
+    padding: 20px;
+  }
+  
+  .card-teal .card-body div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .card-teal .card-body img {
+    width: 50px;                /* Adjust width of the image */
+    height: auto;               /* Maintain aspect ratio */
+    margin-left: 15px;          /* Space between image and text */
+  }
+  
+  .card-teal .card-body .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .card-teal .card-body .card-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
 
+  
+  /* Optional: Adjust image size for larger screens */
+  @media (min-width: 768px) {
+    .card-teal img {
+      width: 50px;           /* Increase image size for larger screens */
+    }
+  }
+  
+  .card-teal {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-teal:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-teal .card-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .card-teal .card-body i {
+    font-size: 2.5rem;
+    color: #fff;
+  }
+  
+  .card-teal .card-body .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-teal .card-body .card-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .card-teal .card-body .card-text {
+    margin-top: 5px;
+  }
+  
+  /* Recent Activity Section */
+  section.mt-5 {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  section h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  
+  .recent-list {
+    list-style: none;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .recent-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .recent-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .recent-list li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card-teal {
+      margin-bottom: 20px;
+    }
+  
+    .card-teal .card-body {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: center;
+    }
+  
+    .card-teal .card-body i {
+      margin-bottom: 15px;
+    }
+  
+    .card-teal .card-body .card-title {
+      font-size: 1.25rem;
+    }
+  
+    .card-teal .card-body .card-text {
+      font-size: 1.25rem;
+    }
+  
+    section h4 {
+      font-size: 1.25rem;
+    }
+  
+    .recent-list li {
+      font-size: 0.95rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    section h4 {
+      font-size: 1.1rem;
+    }
+  
+    .recent-list li {
+      font-size: 0.9rem;
+    }
+  }
+  
