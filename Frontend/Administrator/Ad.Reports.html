@@ -21,6 +21,7 @@
 </head>
 <body class="Admin-Reports-Body">
 
+  
     <!-- Sidebar -->
     <div class="sidebar">
         <h2>Admin Dashboard</h2>
@@ -41,29 +42,29 @@
             <label for="date-range">Select Date Range:</label>
             <input type="date" id="start-date" class="form-control" />
             <input type="date" id="end-date" class="form-control" />
-            <button class="btn btn-primary" onclick="filterReports()">Filter</button>
+            <button class="btn" onclick="filterReports()">Filter</button>
         </div>
 
         <!-- Report Cards (Sales, Revenue, etc.) -->
         <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card card-info">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Revenue</h5>
                         <h3>$5,600</h3>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-info">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Sales</h5>
                         <h3>200 Units</h3>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-info">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Stock Alerts</h5>
                         <h3>5 Products</h3>
@@ -71,7 +72,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Charts -->
         <div class="row mt-4">
             <div class="col-md-6">
@@ -96,10 +97,10 @@
     </div>
 
     <!-- Local Chart.js UMD bundle -->
-    <script src="libs/chart.umd.js"></script>
+    <script src="/Frontend/libs/chart.umd.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="libs/bootstrap.bundle.min.js"></script>
+    <script src="/Frontend/libs/bootstrap.bundle.min.js"></script>
 
     <!-- Custom Script for Reports -->
     <script>
@@ -118,10 +119,18 @@
                     borderColor: '#3498db',
                     backgroundColor: 'rgba(52, 152, 219, 0.2)',
                     fill: true,
+                    tension: 0.4,
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
@@ -139,10 +148,19 @@
                     label: 'Revenue ($)',
                     data: revenueData,
                     backgroundColor: '#2ecc71',
+                    borderColor: '#27ae60',
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
@@ -156,7 +174,7 @@
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
 
-            // Assuming you would fetch filtered data here based on the date range.
+            // Simulate filtering action
             alert(`Filtering reports from ${startDate} to ${endDate}`);
         }
     </script>
