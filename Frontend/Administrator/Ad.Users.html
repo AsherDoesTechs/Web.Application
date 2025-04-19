@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users Management</title>
+    <meta name="description" content="Admin panel to manage user accounts in the inventory system.">
+    <meta name="keywords" content="admin, users management, inventory system">
+    <meta name="author" content="Inventory System Team">
+    <!-- Linking Stylesheets -->
+    <link rel="stylesheet" href="Ad.style.css">
+    <link rel="stylesheet" href="/Frontend/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/Frontend/libs/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css"> <!-- Custom Styles -->
+    <!-- Favicon -->
+    <link rel="icon" href="/Frontend/Images/Favicon.png" type="image/png">
+</head>
+<body class="Admin-Dashboard-Body">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Users Management</h1>
+        </div>
+
+        <!-- Add User Button -->
+        <section class="add-user-section">
+            <button class="btn btn-success" onclick="showAddUserForm()">Add New User</button>
+        </section>
+
+        <!-- Users Table Section -->
+        <section class="users-table">
+            <h4>Users List</h4>
+            <table id="users-table" class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Users (Dynamic content will be added by JS or Backend) -->
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td>
+                            <button class="btn btn-info" onclick="editUser(1)">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteUser(1)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>jane.smith@example.com</td>
+                        <td><span class="badge bg-danger">Inactive</span></td>
+                        <td>
+                            <button class="btn btn-info" onclick="editUser(2)">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteUser(2)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Add/Edit User Form -->
+        <section id="add-user-form" class="user-form">
+            <h4>Add New User</h4>
+            <form id="user-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="user-name">Full Name</label>
+                    <input type="text" class="form-control" id="user-name" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" class="form-control" id="user-email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-status">Status</label>
+                    <select class="form-control" id="user-status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save User</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelAddUserForm()">Cancel</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="libs/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        // Function to show the Add User Form
+        function showAddUserForm() {
+            document.getElementById("add-user-form").style.display = "block";
+        }
+
+        // Function to cancel adding a user
+        function cancelAddUserForm() {
+            document.getElementById("add-user-form").style.display = "none";
+        }
+
+        // Example function to edit a user
+        function editUser(id) {
+            console.log("Editing user with ID:", id);
+        }
+
+        // Example function to delete a user
+        function deleteUser(id) {
+            console.log("Deleting user with ID:", id);
+        }
+    </script>
+</body>
+</html>
