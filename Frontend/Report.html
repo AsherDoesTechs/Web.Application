@@ -1,26 +1,142 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management</title>
-    <meta name="description" content="Manage your inventory efficiently with our easy-to-use web application.">
-    <meta name="keywords" content="inventory, management, web app, inventory system">
-    <meta name="author" content="Low-Cal Cost Team">
-    <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:title" content="Inventory Management">
-    <meta property="og:description" content="Manage your inventory efficiently with our easy-to-use web application.">
-    <meta property="og:image" content="Images/Favicon.png">
-    <meta property="og:url" content="http://Inventory-Management.com">
-    <!-- Linking Stylesheets -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="libs/bootstrap.min.css">
-    <link rel="stylesheet" href="libs/bootstrap-icons.css">
-    <!-- Favicon -->
-    <link rel="icon" href="Images/Favicon.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Reports</title>
+  <meta name="description" content="Inventory management reports with offline charting support">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <link rel="stylesheet" href="libs/bootstrap-icons.css">
+  <link rel="icon" href="Images/Favicon.png" type="image/png">
+
 </head>
 <body id="Report-Body">
-    
-    
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Inventory Reports</h2>
+
+    <!-- Summary Cards -->
+    <div class="row text-center">
+      <div class="col-md-3 mb-3">
+        <div class="card card-summary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Total Products</h5>
+            <p class="display-6" id="totalProducts">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card card-summary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">In Stock</h5>
+            <p class="display-6 text-success" id="inStockCount">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card card-summary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Low Stock</h5>
+            <p class="display-6 text-warning" id="lowStockCount">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card card-summary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Out of Stock</h5>
+            <p class="display-6 text-danger" id="outOfStockCount">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory Levels Chart -->
+    <div class="container my-4">
+      <h4 class="mb-3">Inventory Levels</h4>
+      <canvas id="inventoryChart" height="100"></canvas>
+    </div>
+
+    <!-- Export & Print Options -->
+    <div class="text-center my-4">
+      <button class="btn btn-primary me-2" onclick="downloadCSV()"><i class="bi bi-download"></i> Export CSV</button>
+      <button class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> Print Report</button>
+    </div>
+  </div>
+
+  <!-- Local Chart.js UMD bundle -->
+  <script src="libs/chart.umd.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script>
+    const inventoryData = [
+      { name: 'Smartphone', quantity: 50 },
+      { name: 'Office Chair', quantity: 5 },
+      { name: 'T-Shirt', quantity: 100 },
+      { name: 'Action Figure', quantity: 0 },
+      { name: 'Laptop', quantity: 30 }
+    ];
+
+    function updateInventorySummary(data) {
+      const total = data.length;
+      const inStock = data.filter(p => p.quantity > 10).length;
+      const lowStock = data.filter(p => p.quantity > 0 && p.quantity <= 10).length;
+      const outOfStock = data.filter(p => p.quantity === 0).length;
+      document.getElementById('totalProducts').innerText = total;
+      document.getElementById('inStockCount').innerText = inStock;
+      document.getElementById('lowStockCount').innerText = lowStock;
+      document.getElementById('outOfStockCount').innerText = outOfStock;
+    }
+
+    function renderInventoryChart(data) {
+      const ctx = document.getElementById('inventoryChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.map(p => p.name),
+          datasets: [{
+            label: 'Quantity in Stock',
+            data: data.map(p => p.quantity),
+            backgroundColor: data.map(p => p.quantity === 0 ? 'rgba(255,99,132,0.6)' : p.quantity <=10 ? 'rgba(255,206,86,0.6)' : 'rgba(75,192,192,0.6)'),
+            borderColor: 'rgba(0,0,0,0.1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (context) => `${context.dataset.label}: ${context.parsed.y}`
+              }
+            }
+          },
+          onClick: (e, elements) => {
+            if (elements.length > 0) {
+              const index = elements[0].index;
+              alert(`Product: ${inventoryData[index].name}\nStock: ${inventoryData[index].quantity}`);
+            }
+          }
+        }
+      });
+    }
+
+    function downloadCSV() {
+      let csv = 'Product,Quantity\n';
+      inventoryData.forEach(item => {
+        csv += `${item.name},${item.quantity}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'inventory_report.csv';
+      link.click();
+    }
+
+    updateInventorySummary(inventoryData);
+    renderInventoryChart(inventoryData);
+  </script>
 </body>
 </html>
