@@ -20,3 +20,145 @@
     <link rel="icon" href="/Frontend/Images/Favicon.png" type="image/png">
 </head>
 <body class="Admin-Reports-Body">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Manage Users</a></li>
+            <li><a href="Report.html" class="active">Reports</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Admin Reports</h1>
+
+        <!-- Filters for Reports -->
+        <div class="filters">
+            <label for="date-range">Select Date Range:</label>
+            <input type="date" id="start-date" class="form-control" />
+            <input type="date" id="end-date" class="form-control" />
+            <button class="btn btn-primary" onclick="filterReports()">Filter</button>
+        </div>
+
+        <!-- Report Cards (Sales, Revenue, etc.) -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Revenue</h5>
+                        <h3>$5,600</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Sales</h5>
+                        <h3>200 Units</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Alerts</h5>
+                        <h3>5 Products</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <canvas id="salesChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity mt-5">
+            <h4>Recent Activity</h4>
+            <ul>
+                <li>New product added: Widget C</li>
+                <li>Stock level updated for Gadget A</li>
+                <li>Stock level updated for Widget B</li>
+                <li>Product removed: Gadget B</li>
+                <li>New product added: Gadget C</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Local Chart.js UMD bundle -->
+    <script src="libs/chart.umd.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="libs/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script for Reports -->
+    <script>
+        // Example Data for Sales and Revenue Charts
+        const salesData = [12, 15, 10, 20, 25, 30, 35];
+        const revenueData = [1000, 1500, 1200, 2500, 3000, 3500, 4000];
+
+        // Sales Chart Configuration
+        const salesChart = new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Total Sales',
+                    data: salesData,
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Revenue Chart Configuration
+        const revenueChart = new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Revenue ($)',
+                    data: revenueData,
+                    backgroundColor: '#2ecc71',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Function to Filter Reports Based on Date Range
+        function filterReports() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            // Assuming you would fetch filtered data here based on the date range.
+            alert(`Filtering reports from ${startDate} to ${endDate}`);
+        }
+    </script>
+</body>
+</html>
