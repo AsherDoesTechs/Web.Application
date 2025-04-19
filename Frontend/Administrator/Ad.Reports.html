@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrator | Reports</title>
-    <meta name="description" content="Monitor your inventory reports efficiently with easy-to-navigate sections and dynamic cards.">
-    <meta name="keywords" content="inventory, reports, management, sales, revenue">
-    <meta name="author" content="Low-Cal Cost Team">
+    <title>Admin Reports</title>
+    <meta name="description" content="Admin panel for generating reports on inventory and system performance.">
+    <meta name="keywords" content="admin, reports, inventory system, analytics">
+    <meta name="author" content="Inventory System Team">
+    <!-- Linking Stylesheets -->
+    <link rel="stylesheet" href="Ad.style.css">
     <link rel="stylesheet" href="/Frontend/libs/bootstrap.min.css">
     <link rel="stylesheet" href="/Frontend/libs/bootstrap-icons.css">
-    <link rel="stylesheet" href="Ad.style.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
     <link rel="icon" href="/Frontend/Images/Favicon.png" type="image/png">
+    <!-- Chart.js for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="Admin-Reports-Body">
-    <!-- Sidebar -->
+<body class="Admin-Dashboard-Body">
+    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <h2>Admin Dashboard</h2>
         <ul>
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">User Management</a></li>
-            <li><a href="#">Inventory Control</a></li>
-            <li><a href="reports.html" class="active">Reports</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Reports</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
@@ -28,53 +34,90 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="header">
-            <h1>Reports Overview</h1>
+            <h1>Reports</h1>
         </div>
 
-        <!-- Report Filters -->
-        <div class="filters mt-4">
-            <div class="filter-group">
-                <label for="start-date">Start Date:</label>
-                <input type="date" id="start-date" class="form-control">
-            </div>
-            <div class="filter-group">
-                <label for="end-date">End Date:</label>
-                <input type="date" id="end-date" class="form-control">
-            </div>
-            <button class="btn btn-primary mt-3" onclick="filterReports()">Filter</button>
-        </div>
-
-        <!-- Report Cards -->
-        <div class="container mt-4">
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="report-cards-container">
-                <!-- Report cards will be generated dynamically here -->
-            </div>
-        </div>
-
-        <!-- Sales and Revenue Graphs -->
-        <div class="charts mt-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <canvas id="salesChart"></canvas>
-                </div>
-                <div class="col-md-6">
-                    <canvas id="revenueChart"></canvas>
+        <!-- Reports Overview -->
+        <section class="reports-overview">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Total Products</h4>
+                    <p id="total-products">300</p>
                 </div>
             </div>
-        </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4>Total Stock Alerts</h4>
+                    <p id="total-stock-alerts">8</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4>Recent Activity</h4>
+                    <p id="recent-activity">50</p>
+                </div>
+            </div>
+        </section>
 
-        <!-- Activity Log Section -->
-        <div class="activity-log mt-5">
-            <h4>Recent Activity Log</h4>
-            <ul id="activity-log">
-                <!-- Activity log items will be dynamically generated here -->
-            </ul>
-        </div>
+        <!-- Sales Trends Graph -->
+        <section class="charts">
+            <div class="chart-container">
+                <h4>Sales Trends</h4>
+                <canvas id="sales-trends-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h4>Stock Alerts by Category</h4>
+                <canvas id="stock-alerts-chart"></canvas>
+            </div>
+        </section>
     </div>
 
     <!-- Bootstrap JS Bundle -->
-    <script src="/Frontend/libs/bootstrap.bundle.min.js"></script>
-    <script src="/Frontend/libs/chart.umd.js"></script>
-    <script src="reports.js"></script>
+    <script src="libs/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        // Sales Trends Graph (Bar Chart)
+        var ctx = document.getElementById('sales-trends-chart').getContext('2d');
+        var salesTrendsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales Trends',
+                    data: [120, 150, 180, 200, 170, 210],
+                    backgroundColor: '#4e73df',
+                    borderColor: '#4e73df',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Stock Alerts by Category (Pie Chart)
+        var ctx2 = document.getElementById('stock-alerts-chart').getContext('2d');
+        var stockAlertsChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Electronics', 'Furniture', 'Clothing', 'Food', 'Books'],
+                datasets: [{
+                    label: 'Stock Alerts by Category',
+                    data: [15, 8, 5, 10, 2],
+                    backgroundColor: ['#ff4e00', '#4e9e00', '#00bfff', '#ffdc00', '#d50000'],
+                    borderColor: ['#ff4e00', '#4e9e00', '#00bfff', '#ffdc00', '#d50000'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
 </body>
 </html>
