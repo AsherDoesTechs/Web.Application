@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Categories Management</title>
+    <meta name="description" content="Admin panel to manage categories in the inventory system.">
+    <meta name="keywords" content="admin, categories management, inventory system">
+    <meta name="author" content="Inventory System Team">
+    <!-- Linking Stylesheets -->
+    <link rel="stylesheet" href="Ad.style.css">
+    <link rel="stylesheet" href="/Frontend/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/Frontend/libs/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css"> <!-- Custom Styles -->
+    <!-- Favicon -->
+    <link rel="icon" href="/Frontend/Images/Favicon.png" type="image/png">
+</head>
+<body class="Admin-Dashboard-Body">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Categories Management</h1>
+        </div>
+
+        <!-- Add Category Button -->
+        <section class="add-category-section">
+            <button class="btn btn-success" onclick="showAddCategoryForm()">Add New Category</button>
+        </section>
+
+        <!-- Categories Table Section -->
+        <section class="categories-table">
+            <h4>Categories List</h4>
+            <table id="categories-table" class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Categories (Dynamic content will be added by JS or Backend) -->
+                    <tr>
+                        <td>Electronics</td>
+                        <td>
+                            <button class="btn btn-info" onclick="editCategory(1)">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteCategory(1)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Furniture</td>
+                        <td>
+                            <button class="btn btn-info" onclick="editCategory(2)">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteCategory(2)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Add/Edit Category Form -->
+        <section id="add-category-form" class="category-form">
+            <h4>Add New Category</h4>
+            <form id="category-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="category-name">Category Name</label>
+                    <input type="text" class="form-control" id="category-name" placeholder="Enter category name" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Category</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelAddCategoryForm()">Cancel</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="libs/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        // Function to show the Add Category Form
+        function showAddCategoryForm() {
+            document.getElementById("add-category-form").style.display = "block";
+        }
+
+        // Function to cancel adding a category
+        function cancelAddCategoryForm() {
+            document.getElementById("add-category-form").style.display = "none";
+        }
+
+        // Example function to edit a category
+        function editCategory(id) {
+            console.log("Editing category with ID:", id);
+        }
+
+        // Example function to delete a category
+        function deleteCategory(id) {
+            console.log("Deleting category with ID:", id);
+        }
+    </script>
+</body>
+</html>
