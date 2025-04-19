@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body    {
+#Login-Body    {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,11 +122,14 @@ body    {
     box-sizing: border-box;
   }
   
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-    height: 100vh;
+#Registration-Body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(Images/warehouse-isometric-composition.png) no-repeat;
+  background-size: cover;
+  background-position: center;
   }
   
   /* Main Container Styling */
@@ -333,50 +336,165 @@ body    {
     justify-content: space-between;
   }
 
-  body {
-    background: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  .card-summary {
-    cursor: default;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card-summary:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  h2 {
-    font-weight: 600;
-    color: #343a40;
-  }
-  h5.card-title {
-    font-size: 1.1rem;
-    color: #6c757d;
-  }
-  .display-6 {
-    font-weight: bold;
-  }
-  .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-  #addProductForm { display:none; }
-  thead th { position:sticky; top:0; background:#fff; }
-  .chart-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-  }
-  canvas {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    max-width: 100%;
-  }
-  @media print {
-    .chart-container {
-      justify-content: center !important;
+    /* Base Styles */
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-  }
+    h2 {
+      font-weight: 600;
+      color: #343a40;
+    }
+    h5.card-title {
+      font-size: 1.1rem;
+      color: #6c757d;
+    }
+    .display-6 {
+      font-weight: bold;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 0.75rem 1rem;
+    }
+    .navbar-brand {
+      color: #343a40 !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .navbar-nav .nav-link {
+      color: #343a40 !important;
+      margin-right: 1rem;
+      font-weight: 600;
+    }
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link:hover {
+      color: #0d6efd !important;
+    }
+
+    /* Card Summary */
+    .card-summary {
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-summary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Chart Container */
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    canvas {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      max-width: 100%;
+    }
+
+    /* Alerts */
+    .alert {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1050;
+      min-width: 250px;
+    }
+
+    @media print {
+      .chart-container {
+        justify-content: center !important;
+      }
+    }
+
+     /* Base Styles */
+     #Report-Body {
+      background: #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h2 {
+      font-weight: 600;
+      color: #343a40;
+    }
+    h5.card-title {
+      font-size: 1.1rem;
+      color: #6c757d;
+    }
+    .display-6 {
+      font-weight: bold;
+    }
+
+    /* Navbar Styles */
+    nav.navbar {
+      background-color: #007bff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 0.75rem 1rem;
+    }
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: bold;
+      font-size: 1.75rem;
+    }
+    .navbar-toggler-icon {
+      background-color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      margin-right: 1rem;
+      font-weight: 600;
+    }
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link:hover {
+      color: #f8f9fa !important;
+    }
+
+    /* Card Summary */
+    .card-summary {
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-summary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Chart Container */
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    canvas {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      max-width: 100%;
+    }
+
+    /* Alerts */
+    .alert {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1050;
+      min-width: 250px;
+    }
+
+    @media print {
+      .chart-container {
+        justify-content: center !important;
+      }
+    }

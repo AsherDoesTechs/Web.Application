@@ -3,16 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Reports</title>
+  <title>Inventory Management | Reports</title>
   <meta name="description" content="Inventory management reports with offline charting support">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="libs/bootstrap.min.css">
   <link rel="stylesheet" href="libs/bootstrap-icons.css">
-  <link rel="icon" href="Images/Favicon.png" type="image/png">    
+  <link rel="icon" href="Images/Favicon.png" type="image/png">   
 </head>
 <body id="Report-Body">
+ <!-- Navigation Bar -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-dark px-4">
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <i class="bi bi-box-seam me-2"></i>
+    Inventory Management
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link active" href="Dashboard.html">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="Products.html">Products</a></li>
+      <li class="nav-item"><a class="nav-link" href="Report.html">Reports</a></li>
+      <li class="nav-item"><a class="nav-link" href="LoginForm.html">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
   <div class="container my-5">
     <h2 class="text-center mb-4">Inventory Reports</h2>
+
+    <!-- Alerts -->
+    <div id="alertPlaceholder"></div>
 
     <!-- Summary Cards -->
     <div class="row text-center">
@@ -84,6 +107,20 @@
       document.getElementById('inStockCount').innerText = inStock;
       document.getElementById('lowStockCount').innerText = lowStock;
       document.getElementById('outOfStockCount').innerText = outOfStock;
+
+      if (lowStock > 0) showAlert('warning', `${lowStock} product(s) are low in stock.`);
+      if (outOfStock > 0) showAlert('danger', `${outOfStock} product(s) are out of stock!`);
+    }
+
+    function showAlert(type, message) {
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      document.getElementById('alertPlaceholder').appendChild(wrapper);
     }
 
     function renderInventoryChart(data) {
@@ -95,28 +132,13 @@
           datasets: [{
             label: 'Quantity in Stock',
             data: data.map(p => p.quantity),
-            backgroundColor: data.map(p => p.quantity === 0 ? 'rgba(255,99,132,0.6)' : p.quantity <=10 ? 'rgba(255,206,86,0.6)' : 'rgba(75,192,192,0.6)'),
-            borderColor: 'rgba(0,0,0,0.1)',
-            borderWidth: 1
+            backgroundColor: data.map(p => p.quantity === 0 ? 'rgba(255,99,132,0.6)' : p.quantity <=10 ? 'rgba(255,206,86,0.6)' : 'rgba(75,192,192,0.6)')
           }]
         },
         options: {
           responsive: true,
           scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: (context) => `${context.dataset.label}: ${context.parsed.y}`
-              }
-            }
-          },
-          onClick: (e, elements) => {
-            if (elements.length > 0) {
-              const index = elements[0].index;
-              alert(`Product: ${inventoryData[index].name}\nStock: ${inventoryData[index].quantity}`);
-            }
-          }
+          plugins: { legend: { display: false } }
         }
       });
     }
